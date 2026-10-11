@@ -1,0 +1,237 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* NovaFin design tokens (shadcn/ui compatible). Light theme first, dark overrides below. */
+:root {
+  --radius: 0.9rem;
+  --background: oklch(0.985 0.004 260);
+  --foreground: oklch(0.2 0.03 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.03 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.03 265);
+  --primary: oklch(0.56 0.22 264);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.955 0.01 265);
+  --secondary-foreground: oklch(0.25 0.03 265);
+  --muted: oklch(0.955 0.008 265);
+  --muted-foreground: oklch(0.5 0.03 265);
+  --accent: oklch(0.94 0.02 275);
+  --accent-foreground: oklch(0.25 0.05 275);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.91 0.012 265);
+  --input: oklch(0.9 0.012 265);
+  --ring: oklch(0.56 0.22 264);
+  --gain: oklch(0.62 0.17 155);
+  --loss: oklch(0.6 0.21 25);
+  --violet: oklch(0.58 0.22 295);
+  --teal: oklch(0.68 0.13 185);
+  --sidebar: oklch(0.975 0.006 265);
+  --chart-grid: oklch(0.9 0.01 265);
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #4a3aa7;
+  --series-8: #e34948;
+}
+
+.dark {
+  --background: oklch(0.155 0.03 265);
+  --foreground: oklch(0.95 0.01 265);
+  --card: oklch(0.2 0.03 266);
+  --card-foreground: oklch(0.95 0.01 265);
+  --popover: oklch(0.21 0.03 266);
+  --popover-foreground: oklch(0.95 0.01 265);
+  --primary: oklch(0.65 0.2 262);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.255 0.03 266);
+  --secondary-foreground: oklch(0.93 0.01 265);
+  --muted: oklch(0.245 0.025 266);
+  --muted-foreground: oklch(0.7 0.03 265);
+  --accent: oklch(0.29 0.05 275);
+  --accent-foreground: oklch(0.95 0.01 265);
+  --destructive: oklch(0.62 0.21 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.3 0.03 266);
+  --input: oklch(0.31 0.03 266);
+  --ring: oklch(0.65 0.2 262);
+  --gain: oklch(0.74 0.17 155);
+  --loss: oklch(0.68 0.2 22);
+  --violet: oklch(0.68 0.2 295);
+  --teal: oklch(0.76 0.13 185);
+  --sidebar: oklch(0.135 0.028 266);
+  --chart-grid: oklch(0.3 0.03 266);
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gain: var(--gain);
+  --color-loss: var(--loss);
+  --color-violet: var(--violet);
+  --color-teal: var(--teal);
+  --color-sidebar: var(--sidebar);
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  /* Grid items default to min-width:auto, which lets wide content (tables, long <select> options)
+     stretch a column past the viewport on phones. Let them shrink; utilities can still override. */
+  .grid > * {
+    min-width: 0;
+  }
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+  }
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility glass {
+  background: color-mix(in oklch, var(--color-card) 72%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+@utility bg-hero {
+  background:
+    radial-gradient(1200px 500px at 0% -10%, color-mix(in oklch, var(--color-primary) 22%, transparent), transparent 60%),
+    radial-gradient(900px 400px at 100% 0%, color-mix(in oklch, var(--color-violet) 18%, transparent), transparent 60%),
+    radial-gradient(700px 300px at 50% 120%, color-mix(in oklch, var(--color-teal) 12%, transparent), transparent 60%);
+}
+
+@utility text-gradient {
+  background: linear-gradient(100deg, var(--color-primary), var(--color-violet) 55%, var(--color-teal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Scrollbars */
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--color-muted-foreground) 30%, transparent);
+  border-radius: 999px;
+}
+
+/* html5-qrcode renders its own DOM — keep it tidy */
+#novafin-qr-reader video {
+  border-radius: 0.75rem;
+  object-fit: cover;
+}
+#novafin-qr-reader {
+  border: none !important;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes flash-up {
+  0% {
+    background-color: color-mix(in oklch, var(--color-gain) 28%, transparent);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+@keyframes flash-down {
+  0% {
+    background-color: color-mix(in oklch, var(--color-loss) 28%, transparent);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+.flash-up {
+  animation: flash-up 1.2s ease-out;
+}
+.flash-down {
+  animation: flash-down 1.2s ease-out;
+}
+
+/* Print-friendly receipts */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    inset: 0;
+    padding: 24px;
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

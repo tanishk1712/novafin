@@ -1,0 +1,27 @@
+{
+  "name": "novafin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NovaFin - simulated fintech wallet, currency exchange, paper trading and QR payments demo",
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "build": "npm run build -w backend && npm run build -w frontend",
+    "start": "concurrently -k -n api,web -c cyan,magenta \"npm run start -w backend\" \"npm run start -w frontend\"",
+    "test": "npm run test -w shared && npm run test -w backend && npm run test -w frontend",
+    "typecheck": "npm run typecheck -w shared && npm run typecheck -w backend && npm run typecheck -w frontend"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "typescript": "^5.9.3"
+  }
+}
